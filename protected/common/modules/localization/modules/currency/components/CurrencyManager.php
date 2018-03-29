@@ -88,16 +88,16 @@ class CurrencyManager extends \yii\base\Component
     /**
      * Get chosen currency symbol
      * @param string $currencyCode
-     * @return string
+     * @return array
      */
     public function getCurrencySymbol($currencyCode)
     {
         $currency = $this->getCurrencyByCode($currencyCode);
         if(!empty($currency))
         {
-            return $currency['symbol_left'];
+            return ['symbol_left' => $currency['symbol_left'], 'symbol_right' => $currency['symbol_right']];
         }
         $defaultCurrency = $this->getCurrencyByCode($this->defaultCurrency);
-        return $defaultCurrency['symbol_left'];
+        return ['symbol_left' => $defaultCurrency['symbol_left'], 'symbol_right' => $defaultCurrency['symbol_right']];
     }
 }
