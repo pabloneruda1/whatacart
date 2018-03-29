@@ -52,11 +52,14 @@ class PriceBehavior extends \yii\base\Behavior
     /**
      * Get price with symbol.
      * @param float $priceByCurrency
-     * @param string $currencySymbol
+     * @param string|array $currencySymbol
      * @return string
      */
     public function getPriceWithSymbol($priceByCurrency, $currencySymbol = null)
     {
+        if(is_array($currencySymbol)){
+            return (empty($currencySymbol['symbol_left']) ? '' : $currencySymbol['symbol_left']) . $priceByCurrency . (empty($currencySymbol['symbol_right']) ? '' : $currencySymbol['symbol_right']);
+        }
         if ($currencySymbol == null)
         {
             $currencySymbol = UsniAdaptor::app()->currencyManager->currencySymbol;
